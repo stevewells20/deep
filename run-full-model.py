@@ -7,6 +7,7 @@ from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
 from keras.utils import np_utils
+from keras.models import load_model
 # load ascii text and covert to lowercase
 import argparse
 
@@ -52,16 +53,11 @@ X = X / float(n_vocab)
 # one hot encode the output variable
 y = np_utils.to_categorical(dataY)
 # define the LSTM model
-model = Sequential()
-model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
-model.add(Dropout(0.2))
-model.add(Dense(y.shape[1], activation='softmax'))
-# load the network weights
-model.load_weights(modelFilename)
-model.compile(loss='categorical_crossentropy', optimizer='adam')
+model = load_model(modelFilename)
 # pick a random seed
 start = numpy.random.randint(0, len(dataX)-1)
 pattern = dataX[start]
+#if (args.seed[0]): pattern = args.seed[0]
 print( "Seed:")
 print( "\"", ''.join([int_to_char[value] for value in pattern]), "\"")
 # generate characters

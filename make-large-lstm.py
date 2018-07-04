@@ -5,9 +5,10 @@ from keras.layers import Dense
 from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.callbacks import ModelCheckpoint
+from keras.callbacks import Callback
 from keras.utils import np_utils
 # load ascii text and covert to lowercase
-filename = "sonnets.txt"
+filename = "wssnt10.txt"
 raw_text = open(filename).read()
 raw_text = raw_text.lower()
 # create mapping of unique chars to integers
